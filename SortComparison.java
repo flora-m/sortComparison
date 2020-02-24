@@ -25,11 +25,16 @@ class SortComparison {
 		double index;
 		int size = a.length;
 
+		if(size == 0)
+		{
+			return null;
+		}
+
 		for(i = 0; i < size; i++)
 		{
 			index = a[i];
 			j = i;
-			while((j > 0) && (a[j-1] > index)) 
+			while((j > 0) && (a[j-1] > index))
 			{
 				a[j] = a[j-1];
 				j = j-1;
@@ -83,11 +88,59 @@ class SortComparison {
 	 * @return array sorted in ascending order
 	 *
 	 */
+
+	//code based on lecture notes
 	static double[] quickSort(double a[]){
 
 		//code for quickSort
+		recursiveQuick(a, 0, a.length-1);
 
-	}//end quickSort
+	}
+
+	public void recursiveQuick(double a[], int lo, int hi)
+	{
+		if(hi <= lo) {
+			return;
+		}
+		int pivotPos = partition(a, lo, hi);
+		recursiveQuick(a, lo, pivotPos-1);
+		recursiveQuick(a, pivotPos+1, hi);
+	}
+
+	private int partition(double[] numbers, int lo, int hi)
+	{
+		int i = lo;
+		int j = hi+1;
+		double pivot = numbers[lo];
+		while(true) {
+			while(numbers[++i] < pivot)
+			{
+				if(i == hi)
+				{
+					break;
+				}
+			}
+			while(pivot < numbers[--j])
+			{
+				if(j == lo)
+				{
+					break;
+				}
+			}
+			if(i >= j)
+			{
+				break;
+			}
+
+			double tmp = numbers[i];
+			numbers[i] = numbers[j];
+			numbers[j] = tmp;
+		}
+		numbers[lo] = numbers[j];
+		numbers[j] = pivot;
+		return j;
+	} //end quickSort
+
 
 	/**
 	 * Sorts an array of doubles using Merge Sort.
@@ -132,7 +185,7 @@ class SortComparison {
 	 */
 
 	//based on code from lecture notes
-	static double[] mergeSortRecursive(double a[]) 
+	static double[] mergeSortRecursive(double a[])
 	{
 		//code for mergeSortRecursive
 		double[] aux = new double[a.length];
@@ -189,4 +242,4 @@ class SortComparison {
 		//todo: do experiments as per assignment instructions
 	}
 
-}//end class
+} //end class
