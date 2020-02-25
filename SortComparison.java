@@ -4,7 +4,7 @@
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
- *  @author
+ *  @author Barbara Molnar
  *  @version HT 2020
  */
 
@@ -25,6 +25,7 @@ class SortComparison {
 		double index;
 		int size = a.length;
 
+		//check if array is empty
 		if(size == 0)
 		{
 			return null;
@@ -58,6 +59,12 @@ class SortComparison {
 
 		//code for selectionSort
 		int size = a.length;
+
+		//check if array is empty
+		if(size == 0)
+		{
+			return null;
+		}
 
 		//one by one move boundary of unsorted array
 		for(int i = 0; i< size-1; i++)
@@ -93,11 +100,18 @@ class SortComparison {
 	static double[] quickSort(double a[]){
 
 		//code for quickSort
+
+		//check if array is empty
+		if(a.length == 0)
+		{
+			return null;
+		}
 		recursiveQuick(a, 0, a.length-1);
+		return a;
 
 	}
 
-	public void recursiveQuick(double a[], int lo, int hi)
+	static void recursiveQuick(double a[], int lo, int hi)
 	{
 		if(hi <= lo) {
 			return;
@@ -107,7 +121,7 @@ class SortComparison {
 		recursiveQuick(a, pivotPos+1, hi);
 	}
 
-	private int partition(double[] numbers, int lo, int hi)
+	static private int partition(double[] numbers, int lo, int hi)
 	{
 		int i = lo;
 		int j = hi+1;
@@ -162,12 +176,18 @@ class SortComparison {
 
 		//code for mergeSortIterative
 		int size = a.length;
+
+		if(size == 0)
+		{
+			return null;
+		}
+
 		double[] aux = new double[size];
 		for(int sz = 1; sz < size; sz = sz + sz)
 		{
 			for(int lo = 0; lo < size-sz; lo += sz+sz)
 			{
-				merge(a, aux, lo, lo+sz+1, Math.min(lo+sz+sz-1,  size-1));
+				merge(a, aux, lo, lo+sz-1, Math.min(lo+sz+sz-1,  size-1));
 			}
 		}
 		return aux;
@@ -188,8 +208,23 @@ class SortComparison {
 	static double[] mergeSortRecursive(double a[])
 	{
 		//code for mergeSortRecursive
+		if(a.length == 0)
+		{
+			return null;
+		}
+
+		for(int i = 0; i < a.length; i++)
+		{
+			System.out.println("Unsorted " + a[i]);
+		}
+
 		double[] aux = new double[a.length];
 		sort(a, aux, 0, a.length - 1);
+
+		for(int j = 0; j < a.length; j++)
+		{
+			System.out.println("Sorted " + a[j]);
+		}
 		return aux;
 
 	}//end mergeSortIterative
