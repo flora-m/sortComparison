@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 // -------------------------------------------------------------------------
 
 /**
@@ -213,18 +217,18 @@ class SortComparison {
 			return null;
 		}
 
-//		for(int i = 0; i < a.length; i++)
-//		{
-//			System.out.println("Unsorted " + a[i]);
-//		}
+		//		for(int i = 0; i < a.length; i++)
+		//		{
+		//			System.out.println("Unsorted " + a[i]);
+		//		}
 
 		double[] aux = new double[a.length];
 		sort(a, aux, 0, a.length - 1);
 
-//		for(int j = 0; j < a.length; j++)
-//		{
-//			System.out.println("Sorted " + a[j]);
-//		}
+		//		for(int j = 0; j < a.length; j++)
+		//		{
+		//			System.out.println("Sorted " + a[j]);
+		//		}
 		return a;
 
 	}//end mergeSortIterative
@@ -271,10 +275,65 @@ class SortComparison {
 
 	//end mergeSortRecursive
 
-
+	//discussed with Roisin Burke
 	public static void main(String[] args) {
-
 		//todo: do experiments as per assignment instructions
+		int size = 10;
+
+		File file = new File("numbers10.txt");
+		Scanner scan;
+		try {
+			scan = new Scanner(file);
+			double[] a = new double[size];
+			double[] b = new double[size];
+			double[] c = new double[size];
+			double[] d = new double[size];
+			double[] e = new double[size];
+
+			for(int i = 0; i < size; i++)
+			{
+				a[i] = scan.nextDouble();
+			}
+
+			b = a; c = a; d = a; e = a;
+
+			double start = System.nanoTime();
+			insertionSort(a);
+			double end = System.nanoTime();
+			double result = (end - start) /1000000;
+			System.out.println("Insertion sort: " + result + " milliseconds");
+
+			double start2 = System.nanoTime();
+			selectionSort(b);
+			double end2= System.nanoTime();
+			double result2 = (end2 - start2) /1000000;
+			System.out.println("Selection sort:" + result2 + " milliseconds");
+
+			double start3 = System.nanoTime();
+			quickSort(c);
+			double end3 = System.nanoTime();
+			double result3 = (end3 - start3) /1000000;
+			System.out.println("Quicksort:" + result3 + " milliseconds");
+
+			double start4 = System.nanoTime();
+			mergeSortIterative(d);
+			double end4= System.nanoTime();
+			double result4 = (end4 - start4) /1000000;
+			System.out.println("Iterative mergesort:" + result4 + " milliseconds");
+
+			double start5 = System.nanoTime();
+			mergeSortRecursive(e);
+			double end5= System.nanoTime();
+			double result5 = (end5 - start5) /1000000;
+			System.out.println("Recursive mergesort:" + result5 + " milliseconds");
+
+			scan.close();
+		} catch (FileNotFoundException e1) {
+
+			e1.printStackTrace();
+		}
+
+
 	}
 
 } //end class
