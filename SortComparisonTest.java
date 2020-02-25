@@ -63,6 +63,7 @@ public class SortComparisonTest
     }
 
     // test function for quick sort
+    @Test
     public void testQuickSort()
     {
     	double[] arr = {22.22, 3.21, 6.32, 19.86, 5.41};

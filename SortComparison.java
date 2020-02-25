@@ -183,14 +183,14 @@ class SortComparison {
 		}
 
 		double[] aux = new double[size];
-		for(int sz = 1; sz < size; sz = sz + sz)
+		for(int subsize = 1; subsize < size; subsize = subsize + subsize)
 		{
-			for(int lo = 0; lo < size-sz; lo += sz+sz)
+			for(int lo = 0; lo < size-subsize; lo += subsize+subsize)
 			{
-				merge(a, aux, lo, lo+sz-1, Math.min(lo+sz+sz-1,  size-1));
+				merge(a, aux, lo, lo+subsize-1, Math.min(lo+subsize+subsize-1,  size-1));
 			}
 		}
-		return aux;
+		return a;
 
 
 	} // end of mergeSortIterative
@@ -213,19 +213,19 @@ class SortComparison {
 			return null;
 		}
 
-		for(int i = 0; i < a.length; i++)
-		{
-			System.out.println("Unsorted " + a[i]);
-		}
+//		for(int i = 0; i < a.length; i++)
+//		{
+//			System.out.println("Unsorted " + a[i]);
+//		}
 
 		double[] aux = new double[a.length];
 		sort(a, aux, 0, a.length - 1);
 
-		for(int j = 0; j < a.length; j++)
-		{
-			System.out.println("Sorted " + a[j]);
-		}
-		return aux;
+//		for(int j = 0; j < a.length; j++)
+//		{
+//			System.out.println("Sorted " + a[j]);
+//		}
+		return a;
 
 	}//end mergeSortIterative
 
@@ -235,9 +235,9 @@ class SortComparison {
 		{
 			return;
 		}
-		int mid = lo + (hi+lo)/2;
+		int mid = lo + (hi-lo)/2;
 		sort(a, aux, lo, mid);
-		sort(a, aux, mid+1, hi);
+		sort(a, aux, mid + 1, hi);
 		merge(a, aux, lo, mid, hi);
 	}
 
@@ -247,16 +247,16 @@ class SortComparison {
 		{
 			aux[k]=a[k];
 		}
-		int i = lo, j = mid+1;
+		int i = lo, j = mid + 1;
 		for(int k = lo; k <= hi; k++)
 		{
-			if(i>mid)
+			if(i > mid)
 			{
 				a[k] = aux[j++];
 			}
-			else if(j>hi)
+			else if(j > hi)
 			{
-				a[k] = aux[j++];
+				a[k] = aux[i++];
 			}
 			else if(aux[j] < aux[i])
 			{
@@ -264,7 +264,7 @@ class SortComparison {
 			}
 			else
 			{
-				a[k] = aux[j++];
+				a[k] = aux[i++];
 			}
 		}
 	}
