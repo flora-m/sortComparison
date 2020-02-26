@@ -110,7 +110,7 @@ class SortComparison {
 		{
 			return null;
 		}
-		recursiveQuick(a, 0, a.length-1);
+		recursiveQuick(a, 0, a.length - 1);
 		return a;
 
 	}
@@ -121,8 +121,8 @@ class SortComparison {
 			return;
 		}
 		int pivotPos = partition(a, lo, hi);
-		recursiveQuick(a, lo, pivotPos-1);
-		recursiveQuick(a, pivotPos+1, hi);
+		recursiveQuick(a, lo, pivotPos - 1);
+		recursiveQuick(a, pivotPos + 1, hi);
 	}
 
 	static private int partition(double[] numbers, int lo, int hi)
@@ -271,17 +271,17 @@ class SortComparison {
 				a[k] = aux[i++];
 			}
 		}
-	}
+	} //end mergeSortRecursive
 
-	//end mergeSortRecursive
 
 	//discussed with Roisin Burke
 	public static void main(String[] args) {
 		//todo: do experiments as per assignment instructions
-		int size = 10;
 
+		int size = 10;
 		File file = new File("numbers10.txt");
 		Scanner scan;
+
 		try {
 			scan = new Scanner(file);
 			double[] a = new double[size];
@@ -328,12 +328,11 @@ class SortComparison {
 			System.out.println("Recursive mergesort:" + result5 + " milliseconds");
 
 			scan.close();
+
 		} catch (FileNotFoundException e1) {
 
 			e1.printStackTrace();
 		}
-
-
 	}
 
 } //end class
